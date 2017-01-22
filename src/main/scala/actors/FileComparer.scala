@@ -14,7 +14,7 @@ class FileComparer extends Actor {
     case MatchingFilesMessage(files, fileToCompareAgainst) =>
       for(file <- files){
         val resultFileName = file.getParent() + "\\_result_" + file.getName()
-        print(resultFileName)
+
         // FileWriter
         val fileResult = new File(resultFileName)
         val bw = new BufferedWriter(new FileWriter(fileResult))

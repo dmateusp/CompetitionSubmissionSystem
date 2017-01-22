@@ -16,7 +16,7 @@ class FolderScanner extends Actor {
   val folderScannerChildRef = context.actorOf(Props[FolderScanner], name = "folderScannerChild")
   val fileComparerChildRef = context.actorOf(Props[FileComparer], name = "fileComparerChild")
 
-
+  // Checks if the name of a file matches any of the regexes given as parameter
   def matchAnyRegex(input: File, regexes: List[Regex]): Boolean = {
     regexes match {
       case Nil => false
@@ -26,6 +26,7 @@ class FolderScanner extends Actor {
     }
   }
 
+  // Finds sub folders in a root folder and starts a new child actor for each sub folder
   def sendSubFolders(path: String, regexes: List[Regex], fileToCompareAgainst: File): Unit ={
     val folder = new File(path)
     if (folder.exists && folder.isDirectory) {
@@ -34,6 +35,8 @@ class FolderScanner extends Actor {
       })
     }
   }
+
+  // Creates a list of files with names matching the given regex
   def sendMatchingFiles(path: String, regexes: List[Regex], fileToCompareAgainst: File): List[File] ={
     val folder = new File(path)
     if (folder.exists && folder.isDirectory) {
@@ -44,6 +47,7 @@ class FolderScanner extends Actor {
   }
 
   def receive = {
+
     case ScanThisFolderMessage(path, regexes, fileToCompareAgainst) =>
       sendSubFolders(path, regexes, fileToCompareAgainst)
 
@@ -55,12 +59,12 @@ class FolderScanner extends Actor {
     case DoneComparingFilesMessage() =>
       if(context.children.isEmpty) {
         sender ! DoneScanningFolderMessage()
-        //context.stop(self)
+        context.stop(self)
       }
     case DoneScanningFolderMessage() =>
       if(context.children.isEmpty) {
-        //context.stop(self)
         sender ! DoneScanningFolderMessage()
+        context.stop(self)
       }
   }
 }
