@@ -28,8 +28,7 @@ object Comparer {
     compareLineByLine(toCompare) / lengthOfModelFile
   }
   def similarity(fileModel: File, fileToCompare: File): String = {
-    (compareFiles(fileModel, fileToCompare) * 100).toString + '%'
+    BigDecimal(compareFiles(fileModel, fileToCompare)*100).setScale(3, BigDecimal.RoundingMode.HALF_UP).toString + '%'
   }
-
 
 }
