@@ -11,16 +11,16 @@ import helper.Comparer
 class FileComparer extends Actor {
 
   def receive = {
-    case MatchingFilesMessage(files, fileToCompareAgainst) =>
-      for(file <- files){
-        val resultFileName = file.getParent() + "\\_result_" + file.getName()
+    case MatchingFileMessage(file, fileToCompareAgainst) =>
 
-        // FileWriter
-        val fileResult = new File(resultFileName)
-        val bw = new BufferedWriter(new FileWriter(fileResult))
-        bw.write(Comparer.similarity(file, fileToCompareAgainst))
-        bw.close()
-      }
-      sender ! DoneComparingFilesMessage()
+      val resultFileName = file.getParent() + "\\_result_" + file.getName()
+
+      // FileWriter
+      val fileResult = new File(resultFileName)
+      val bw = new BufferedWriter(new FileWriter(fileResult))
+      bw.write(Comparer.similarity(file, fileToCompareAgainst))
+      bw.close()
+
+      sender ! Done()
   }
 }

@@ -2,14 +2,14 @@ package actors
 
 import java.io.File
 
-import akka.actor.{Actor, ActorSystem, Props}
+import akka.actor.{Actor, Props}
 
 import scala.util.matching.Regex
 
 /**
   * Created by DanielMateusPires on 20/01/2017.
   */
-class Master extends Actor {
+class Master() extends Actor {
   // Gets the folder to scan (this is the root of the file system)
   val folderToScan: String = "C:\\Users\\DanielMateusPires\\Documents\\docs"
 
@@ -25,5 +25,11 @@ class Master extends Actor {
   def receive = {
     case StartRoutineMessage() ⇒
       folderScannerRef ! ScanThisFolderMessage(folderToScan, filesToMatch, fileToCompareAgainst)
+
+    case Done() =>
+      if (context.children.isEmpty) {
+        sender ! Done()
+        context.stop(self)
+      }
   }
 }
