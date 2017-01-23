@@ -19,8 +19,13 @@ object Comparer {
   }
 
   private def compareFiles(fileModel: File, fileToCompare: File): Double = {
-    val linesFile1 = Source.fromFile(fileModel).getLines().toList
-    val linesFile2 = Source.fromFile(fileToCompare).getLines().toList
+    val source1 = Source.fromFile(fileModel)
+    val linesFile1 = source1.getLines().toList
+    source1.close()
+
+    val source2 = Source.fromFile(fileToCompare)
+    val linesFile2 = source2.getLines().toList
+    source2.close()
 
     val toCompare: List[(String,String)] = linesFile1 zip linesFile2
     val lengthOfModelFile: Double = linesFile1.length
