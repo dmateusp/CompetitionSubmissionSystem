@@ -20,7 +20,5 @@ class FileComparer extends Actor {
       val bw = new BufferedWriter(new FileWriter(fileResult))
       bw.write(Comparer.similarity(file, fileToCompareAgainst))
       bw.close()
-
-      sender ! Done()
   }
 }

@@ -22,8 +22,5 @@ case class ScanForFilesMessage(path: String, regexes: List[Regex], fileToCompare
 // Sends a message containing a file matching the regex (this is a response to ScanForFilesMessage)
 case class MatchingFileMessage(file: File, fileToCompareAgainst: File) extends FileCheckerMessage
 
-// Sends a message when job done
-case class Done() extends FileCheckerMessage
-
 // Sends a message to start the routine
 case class StartRoutineMessage() extends FileCheckerMessage

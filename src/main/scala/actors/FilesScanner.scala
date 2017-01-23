@@ -37,12 +37,5 @@ class FilesScanner extends Actor {
     case ScanForFilesMessage(path, regexes, fileToCompareAgainst) =>
       sendMatchingFiles(path, regexes, fileToCompareAgainst).foreach(file =>
         fileComparerChildRef ! MatchingFileMessage(file, fileToCompareAgainst))
-      sender ! Done()
-
-    case Done() =>
-      if(context.children.isEmpty) {
-        sender ! Done()
-        context.stop(self)
-      }
   }
 }
