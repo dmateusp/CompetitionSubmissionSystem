@@ -14,8 +14,8 @@ One possible configuration would be:
 * Creating one subfolder per team or participant
 * Giving participants write permissions in their subfolders 
 
-See the app working here:
-[![Competition submission system grabbing files](http://img.youtube.com/vi/_Zp71De6blw/0.jpg)](http://www.youtube.com/watch?v=_Zp71De6blw "Competition submission system grabbing files")
+See a video of the app grabbing the files here:
+[Competition submission system grabbing files](http://www.youtube.com/watch?v=_Zp71De6blw)
 
 
 ## Getting started
