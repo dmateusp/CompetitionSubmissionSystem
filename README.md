@@ -22,18 +22,32 @@ See a video of the app grabbing the files here:
 ### Configuring the application
 Download application.conf and change the file to match your configuration
 
-Example:
-`config {
+application.conf example:
+
+```
+config {
    rootFolder = "C:/Users/DanielMateusPires/Dropbox/Competition"
    filesToMatch = ["^submission_.*", "^competition_.*"]
    solution = "C:/Users/DanielMateusPires/Documents/docs/solution.txt"
  }
- `
+ ```
  
  This configuration would:
  * rootFolder: Choose `"C:/Users/DanielMateusPires/Dropbox/Competition"` as the root of the competition submission system, the submissions should then be added to in sub folders as such: `"C:/Users/DanielMateusPires/Dropbox/Competition/TeamA/submission_1.txt"` or `"C:/Users/DanielMateusPires/Dropbox/Competition/TeamB/competition_1.txt"`
  * filesToMatch: Defines an array of regex for submission file names to match (the system will look for files matching the regexes in the subfolders) 
  * solution: The solution for the competition (the submissions will be compared against this file)
+ 
+ 
+ File structure example:
+ ```
+ C:\USERS\DANIELMATEUSPIRES\DROPBOX
+ ├───Competition
+ │   ├───TeamA
+ │   └───TeamB
+ ```
+ /Competition contains all the subfolder for all teams
+ 
+ /TeamA, /TeamB are used to upload the submission files
  
  ### Building the app
  `sbt assembly`
