@@ -9,13 +9,15 @@ The comparison is made line by line and returns a percentage from 0.000% to 100.
 The subfolders will be scanned every 3 seconds for new submissions
 
 One possible configuration would be:
-1. Creating a Dropbox file system or any Network attached storage
-2. Mounting it to the host machine (the one that will run the CompetitionSubmissionSystem)
-3. Creating one subfolder per team or participant
-4. Giving participants write permissions in their subfolders 
+* Creating a Dropbox file system or any Network attached storage
+* Mounting it to the host machine (the one that will run the CompetitionSubmissionSystem)
+* Creating one subfolder per team or participant
+* Giving participants write permissions in their subfolders 
 
 See the app working here:
 [![Competition submission system grabbing files](http://img.youtube.com/vi/_Zp71De6blw/0.jpg)](http://www.youtube.com/watch?v=_Zp71De6blw "Competition submission system grabbing files")
+
+
 ## Getting started
 ### Configuring the application
 Download application.conf and change the file to match your configuration
@@ -29,9 +31,9 @@ Example:
  `
  
  This configuration would:
- - rootFolder: Choose `"C:/Users/DanielMateusPires/Dropbox/Competition"` as the root of the competition submission system, the submissions should then be added to in sub folders as such: `"C:/Users/DanielMateusPires/Dropbox/Competition/TeamA/submission_1.txt"` or `"C:/Users/DanielMateusPires/Dropbox/Competition/TeamB/competition_1.txt"`
- - filesToMatch: Defines an array of regex for submission file names to match (the system will look for files matching the regexes in the subfolders) 
- - solution: The solution for the competition (the submissions will be compared against this file)
+ * rootFolder: Choose `"C:/Users/DanielMateusPires/Dropbox/Competition"` as the root of the competition submission system, the submissions should then be added to in sub folders as such: `"C:/Users/DanielMateusPires/Dropbox/Competition/TeamA/submission_1.txt"` or `"C:/Users/DanielMateusPires/Dropbox/Competition/TeamB/competition_1.txt"`
+ * filesToMatch: Defines an array of regex for submission file names to match (the system will look for files matching the regexes in the subfolders) 
+ * solution: The solution for the competition (the submissions will be compared against this file)
  
  ### Building the app
  `sbt assembly`
@@ -43,7 +45,7 @@ Example:
 Clone the repo and work away!
 
 ### TODO
-1. Tests should be added to the project (I started it as a training project for Actors but it turned into a real tool :) )
-2. Storing the best submission for each team or participant (submission that scores better in the subfolder)
-3. Creating a WebUI to show the current status of the competition (leading board)
-4. Supporting multiple problems and submissions
+* Tests should be added to the project (I started it as a training project for Actors but it turned into a real tool :) )
+* Storing the best submission for each team or participant (submission that scores better in the subfolder)
+* Creating a WebUI to show the current status of the competition (leading board)
+* Supporting multiple problems and submissions
