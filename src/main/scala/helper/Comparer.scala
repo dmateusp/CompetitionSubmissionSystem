@@ -11,6 +11,7 @@ import scala.io.Source
 object Comparer {
   private def bool2int(b:Boolean): Int = if (b) 1 else 0
 
+  // Getting similarity line by line
   private def compareLineByLine(toCompare: List[(String,String)]): Long ={
     toCompare match {
       case Nil => 0
@@ -18,6 +19,7 @@ object Comparer {
     }
   }
 
+  // Getting the lines of both files and adding them to a List as tuples
   private def compareFiles(fileModel: File, fileToCompare: File): Option[Double] = {
     val source1 = Source.fromFile(fileModel)
     val linesFile1 = source1.getLines().toList
@@ -35,6 +37,7 @@ object Comparer {
     }
 
   }
+  // Returns the similarity between two files or empty when submission was empty
   def similarity(fileModel: File, fileToCompare: File): String = {
 
       compareFiles(fileModel, fileToCompare) match {

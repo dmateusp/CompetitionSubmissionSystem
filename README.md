@@ -6,6 +6,7 @@ An input of "Daniel" should return "leinaD"
 
 Instead of having to create and secure a web server, this app points to a folder, grabs submissions, compares them to a solution and returns a result.
 The comparison is made line by line and returns a percentage from 0.000% to 100.000% of similarity between the submission and the solution expected.
+The subfolders will be scanned every 3 seconds for new submissions
 
 One possible configuration would be:
 1. Creating a Dropbox file system or any Network attached storage
@@ -13,6 +14,8 @@ One possible configuration would be:
 3. Creating one subfolder per team or participant
 4. Giving participants write permissions in their subfolders 
 
+See the app working here:
+[![Competition submission system grabbing files](http://img.youtube.com/vi/_Zp71De6blw/0.jpg)](http://www.youtube.com/watch?v=_Zp71De6blw "Competition submission system grabbing files")
 ## Getting started
 ### Configuring the application
 Download application.conf and change the file to match your configuration
