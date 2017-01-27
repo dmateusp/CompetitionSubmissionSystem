@@ -1,5 +1,46 @@
 # CompetitionSubmissionSystem
-An app to manage output submission to File systems (to organise coding competitions)
+This tool is to ease hosting Coding/Data science competitions that only require an output as submission.
+Example:
+`Take a string as input and output the reverse of that string`
+An input of "Daniel" should return "leinaD"
 
-## Important
-Please do not use in the current state, instructions must be added to the README (you could damage your files!)
+Instead of having to create and secure a web server, this app points to a folder, grabs submissions, compares them to a solution and returns a result.
+The comparison is made line by line and returns a percentage from 0.000% to 100.000% of similarity between the submission and the solution expected.
+
+One possible configuration would be:
+1. Creating a Dropbox file system or any Network attached storage
+2. Mounting it to the host machine (the one that will run the CompetitionSubmissionSystem)
+3. Creating one subfolder per team or participant
+4. Giving participants write permissions in their subfolders 
+
+## Getting started
+### Configuring the application
+Download application.conf and change the file to match your configuration
+
+Example:
+`config {
+   rootFolder = "C:/Users/DanielMateusPires/Dropbox/Competition"
+   filesToMatch = ["^submission_.*", "^competition_.*"]
+   solution = "C:/Users/DanielMateusPires/Documents/docs/solution.txt"
+ }
+ `
+ 
+ This configuration would:
+ - rootFolder: Choose `"C:/Users/DanielMateusPires/Dropbox/Competition"` as the root of the competition submission system, the submissions should then be added to in sub folders as such: `"C:/Users/DanielMateusPires/Dropbox/Competition/TeamA/submission_1.txt"` or `"C:/Users/DanielMateusPires/Dropbox/Competition/TeamB/competition_1.txt"`
+ - filesToMatch: Defines an array of regex for submission file names to match (the system will look for files matching the regexes in the subfolders) 
+ - solution: The solution for the competition (the submissions will be compared against this file)
+ 
+ ### Building the app
+ `sbt assembly`
+ 
+ ### Launching the app
+`java -Dconfig.file=path/to/application.conf -jar competition-submission-system.jar`
+
+## Contributing
+Clone the repo and work away!
+
+### TODO
+1. Tests should be added to the project (I started it as a training project for Actors but it turned into a real tool :) )
+2. Storing the best submission for each team or participant (submission that scores better in the subfolder)
+3. Creating a WebUI to show the current status of the competition (leading board)
+4. Supporting multiple problems and submissions
