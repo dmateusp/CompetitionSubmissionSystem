@@ -37,12 +37,13 @@ object Comparer {
     }
 
   }
+
   // Returns the similarity between two files or empty when submission was empty
-  def similarity(fileModel: File, fileToCompare: File): String = {
+  def similarity(fileModel: File, fileToCompare: File): Option[BigDecimal] = {
 
       compareFiles(fileModel, fileToCompare) match {
-        case Some(similarity) => BigDecimal(similarity*100).setScale(3, BigDecimal.RoundingMode.HALF_UP).toString + '%'
-        case None => "Got empty submission"
+        case Some(similarity) => Some(BigDecimal(similarity*100).setScale(3, BigDecimal.RoundingMode.HALF_UP))
+        case None => None
       }
 
   }

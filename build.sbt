@@ -1,6 +1,7 @@
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 scalaVersion := "2.11.8"
 libraryDependencies += "com.typesafe.akka" % "akka-actor_2.11" % "2.4.16"
+libraryDependencies += "com.typesafe.slick" %% "slick" % "3.1.1"
 
 lazy val commonSettings =  Seq(
   name := "File comparer",

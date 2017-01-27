@@ -18,7 +18,10 @@ class FileComparer extends Actor {
       // FileWriter
       val fileResult = new File(resultFileName)
       val bw = new BufferedWriter(new FileWriter(fileResult))
-      bw.write(Comparer.similarity(file, fileToCompareAgainst))
+      bw.write(Comparer.similarity(file, fileToCompareAgainst) match {
+        case Some(similarity) => similarity.toString() + "%"
+        case None => "Got empty submission!"
+      })
       bw.close()
 
       // deletes the file
