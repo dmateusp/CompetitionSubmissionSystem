@@ -19,12 +19,14 @@ class ScoreRecorder extends Actor {
 
   def receive = {
     case ScoreMessage(teamName, score) =>
-      val insert = DBIO.seq(
+      val q = for { s <- submissions if s.score < score } yield s.score
+      val updateAction = q.update(score)
+
+      val insertOrUpdate = DBIO.seq(
+        updateAction,
         submissions += (teamName, score)
       )
 
-      println(Master.dbPath)
-
-      db.run(insert)
+      db.run(insertOrUpdate)
   }
 }

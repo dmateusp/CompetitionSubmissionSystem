@@ -23,7 +23,7 @@ class FileComparer extends Actor {
       bw.write(Comparer.similarity(file, fileToCompareAgainst) match {
         case Some(similarity) => {
           scoreRecorderRef ! ScoreMessage(file.getParentFile().getName(), similarity)
-          similarity.toString() + "%"
+          (BigDecimal(similarity)/1000).toString() + "%"
         }
         case None => "Got empty submission!"
       })

@@ -23,7 +23,7 @@ case class ScanForFilesMessage(path: String, regexes: List[Regex], fileToCompare
 case class MatchingFileMessage(file: File, fileToCompareAgainst: File) extends FileCheckerMessage
 
 // Sends a message with the score of a team
-case class ScoreMessage(teamName: String, score: Double) extends FileCheckerMessage
+case class ScoreMessage(teamName: String, score: Int) extends FileCheckerMessage
 
 // Sends a message to start the routine
 case class StartRoutineMessage() extends FileCheckerMessage
