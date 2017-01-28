@@ -2,13 +2,15 @@ package actors
 
 import java.io.{BufferedWriter, File, FileWriter}
 
-import akka.actor.Actor
+import akka.actor.{Actor, Props}
 import helper.Comparer
 
 /**
   * Created by DanielMateusPires on 21/01/2017.
   */
 class FileComparer extends Actor {
+
+  val scoreRecorderRef = context.actorOf(Props[ScoreRecorder], name = "scoreRecorderChild")
 
   def receive = {
     case MatchingFileMessage(file, fileToCompareAgainst) =>
@@ -19,7 +21,10 @@ class FileComparer extends Actor {
       val fileResult = new File(resultFileName)
       val bw = new BufferedWriter(new FileWriter(fileResult))
       bw.write(Comparer.similarity(file, fileToCompareAgainst) match {
-        case Some(similarity) => similarity.toString() + "%"
+        case Some(similarity) => {
+          scoreRecorderRef ! ScoreMessage(file.getParentFile().getName(), similarity)
+          similarity.toString() + "%"
+        }
         case None => "Got empty submission!"
       })
       bw.close()
