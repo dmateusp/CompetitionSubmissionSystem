@@ -1,0 +1,3 @@
+[submodule "SimpleLeaderboardWebUI"]
+	path = SimpleLeaderboardWebUI
+	url = https://github.com/dmateusp/SimpleLeaderboardWebUI.git
